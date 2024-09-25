@@ -1,0 +1,48 @@
+
+img{
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+}
+
+
+div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+}
+
+.divi{
+    margin: 10px;
+    // background-color: aqua;
+    // align-items: center;
+    position: relative;
+    margin-left: 40%;
+
+}
+
+
+
+
+
+
+.camera-icon {
+    position: absolute;
+    top: 50%;
+    left: 8.5%;
+    // width: 10%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.divi:hover .mat-elevation-z5{
+    filter: blur(1px);
+}
+
+.divi:hover .camera-icon {
+    opacity: 0.8;
+}
+

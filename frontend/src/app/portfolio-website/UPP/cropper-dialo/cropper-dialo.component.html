@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>
+    Please crop your photo
+</h1>
+
+<div mat-dialog-content>
+    <image-cropper
+    [imageFile]="data.image"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="data.width / data.height"
+    [resizeToHeight]="data.height"
+    [resizeToWidth]="data.width"
+    (imageCropped)="imageCropped($event)"
+    >
+</image-cropper>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="false">
+        Cancel
+    </button>
+    <button mat-raised-button [mat-dialog-close]="result()">
+        Done
+    </button>
+
+
+</div>

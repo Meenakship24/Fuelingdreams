@@ -1,0 +1,72 @@
+<section class="login-main">
+    <div class="welcome-div">
+        <div class="main-cont-div">
+            <h1>Welcome Back,</h1>
+            <h2>Onward with Your Professional </h2>
+            <h3>Journey</h3>
+        </div>
+
+    </div>
+    <div class="cont-div">
+        <div class="form-cont">
+            <form class="setup-container">
+                <h1 class="setup-title">Setup your Account</h1>
+                <div class="name-container">
+
+                    <label for="firstName" class="visually-hidden">First Name</label>
+                    <input type="text" id="firstName" class="input-field" placeholder="First Name"
+                        aria-label="First Name">
+
+
+                    <label for="lastName" class="visually-hidden">Last Name</label>
+                    <input type="text" id="lastName" class="input-field" placeholder="Last Name" aria-label="Last Name">
+
+                </div>
+                <div class="info-container">
+
+                    <label for="dob" class="visually-hidden">Date of Birth</label>
+                    <input type="date" id="dob" class="input-field" aria-label="Date of Birth">
+                    <label for="gender" class="visually-hidden">Gender</label>
+                    <select id="gender" class="input-field" aria-label="Gender">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <label for="address" class="visually-hidden">Address</label>
+                <input type="text" id="address" class="input-field" placeholder="Address" aria-label="Address">
+                <label for="email" class="visually-hidden">Email Address</label>
+                <input type="email" id="email" class="input-field" placeholder="Email Address"
+                    aria-label="Email Address">
+                <label for="mobile" class="visually-hidden">Mobile Number</label>
+                <input type="tel" id="mobile" class="input-field" placeholder="Mobile Number"
+                    aria-label="Mobile Number">
+                <label for="country" class="visually-hidden">Country</label>
+                <input type="text" id="country" class="input-field" placeholder="Country" aria-label="Country">
+                <label for="password" class="visually-hidden">Password</label>
+                <input type="password" id="password" class="input-field" placeholder="Password" aria-label="Password">
+                <label for="confirmPassword" class="visually-hidden">Confirm Password</label>
+                <input type="password" id="confirmPassword" class="input-field" placeholder="Confirm Password"
+                    aria-label="Confirm Password">
+                <button type="submit" class="signup-button">
+                    <span class="button-text">Sign up</span>
+                </button>
+                <div class="divider" role="separator"></div>
+                <div class="account-info">
+                    <p class="account-text">
+                        Already have an account?
+                        <span class="highlight" (click)="onSignIn()">Sign in</span>
+                    </p>
+                    <img loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/b8797c5becf7723d83193677d4c9aeffd06aadb9d86079f8a3b85a61c36fdf4c?apiKey=29dab7774a384f96b516fac98fcc54ae&&apiKey=29dab7774a384f96b516fac98fcc54ae"
+                        class="account-icon" alt="" />
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+</section>

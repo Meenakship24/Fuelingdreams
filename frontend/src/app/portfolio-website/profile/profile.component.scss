@@ -1,0 +1,281 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.inner-box {
+    display: flex;
+    margin: 0 27%;
+    width: 60%;
+    max-width: 100%;
+    background-color: #ffffff;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.profile-image {
+    position: relative;
+    background-color: rgb(180, 180, 218);
+    border-radius: 100%;
+    margin: 7px 0;
+    width: 100px;
+    aspect-ratio: 1.11;
+    max-width: 100%;
+    align-self: center;
+    overflow: hidden;
+}
+
+.profile-pic {
+    width: 10%;
+    height: 10%;
+    border-radius: 100%;
+    transition: filter 0.3s ease-in-out;
+    object-fit: cover;
+    object-position: center;
+}
+
+.camera-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.profile-image:hover .profile-pic {
+    filter: blur(4px);
+}
+
+.profile-image:hover .camera-icon {
+    opacity: 1;
+}
+
+
+.UPP{
+    // position: relative;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    
+    // background-color: #ff0000;
+}
+
+// img{
+//     width: 10%;
+// }
+
+
+.section-container {
+    margin-top: 10px;
+    
+}
+
+.info-container {
+    gap: 20px;
+    display: flex;
+    width: 92%;
+    
+
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 50%;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.form-field {
+    display: flex;
+    margin-top: 10px;
+    flex-grow: 1;
+    flex-direction: column;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.label {
+    align-self: start;
+    margin-top: 14px;
+    
+}
+
+.input-field {
+    border-radius: 10px;
+    background-color: rgba(190, 205, 214, 0.45);
+    display: flex;
+    margin-top: 13px;
+    height: 41px;
+    border: none;
+    padding: 0 10px;
+}
+
+.address-label,
+.email-label,
+.mobile-label,
+.country-label {
+    color: rgba(0, 0, 0, 1);
+    // align-self: start;
+    font-weight: 600;
+    padding-top: 20px;
+    font-size: 16px;
+}
+
+
+.address-label {
+    margin-top: 30px;
+}
+
+// .email-label {
+//     margin: 25px 0 0 12px;
+// }
+
+// .mobile-label {
+//     margin: 32px 0 0 11px;
+// }
+
+// .country-label {
+//     margin: 35px 0 0 15px;
+// }
+
+.address-field,
+.email-field,
+.mobile-field,
+.country-field {
+    border-radius: 10px;
+    background-color: rgba(190, 205, 214, 0.45);
+    display: flex;
+    margin: 10px 0px;
+    width: 90%;
+    height: 41px;
+    border: none;
+    padding: 0 10px;
+}
+
+.button-container {
+    display: flex;
+    margin-top: 63px;
+    align-items: start;
+    gap: 0 45%;
+    color: rgba(255, 255, 255, 1);
+    white-space: nowrap;
+    flex-wrap: wrap;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 5px 0;
+}
+
+.button-inner {
+    border-radius: 10px;
+    background-color: rgba(101, 99, 255, 1);
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    align-items: start;
+    padding: 0 20px;
+}
+
+.button-content {
+    align-self: stretch;
+    z-index: 10;
+    min-height: 57px;
+    gap: 5px;
+    margin: -5px 0;
+    padding: 10px 5px;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.button-inner:hover{
+    background-color:  rgb(81, 79, 231);
+}
+
+@media (max-width: 991px) {
+    .section-container {
+        max-width: 100%;
+        margin-right: 2px;
+    }
+
+    .info-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0px;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .form-field {
+        margin-top: 40px;
+    }
+
+    .label {
+        margin-left: 10px;
+    }
+
+    .address-label {
+        margin-left: 7px;
+    }
+
+    .address-field,
+    .email-field,
+    .mobile-field,
+    .country-field {
+        margin-right: 2px;
+    }
+
+    .email-label,
+    .mobile-label,
+    .country-label {
+        margin-left: 10px;
+    }
+
+    .button-container {
+        max-width: 100%;
+        margin-top: 40px;
+        white-space: initial;
+    }
+
+    .button,
+    .button-content {
+        white-space: initial;
+    }
+}
+
+.delete-button {
+    // position: relative;
+    top: 10px;
+    margin-left: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border-radius: 50%;
+    color: #e01515;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+//   .delete-buttom mat-icon {
+//     font-size: 24px;
+//     color: #e01515;
+//   }

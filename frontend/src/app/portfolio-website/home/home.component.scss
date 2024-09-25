@@ -1,0 +1,60 @@
+.home-container{
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(153, 238, 234);
+    font-family: "Lobster" ,sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.thumb-container{
+    overflow: hidden;
+    border-radius: px;
+}
+
+.thumb-image{
+    width: 600px;
+    height: 300px;
+    object-fit: cover;
+
+}
+
+.img-container{
+    flex: 1;
+}
+.img-container img{
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.text-container{
+    flex: 2;
+    padding: 0 20px;
+}
+
+.text-container h1{
+    font-size: 2.53em;
+    color: #333;
+
+}
+
+.text-container p{
+    font-size: 1.2em;
+    color: #555;
+
+
+}
+
+.animate__fadeInLeft{
+    animation-name: fadeInLeft;
+}
+
+.profile-image {
+    width: 300px;
+    height: 300px;
+}
+
+.align-items-center{
+    justify-content: center;
+    text-align: center;
+}
