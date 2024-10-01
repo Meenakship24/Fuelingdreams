@@ -45,22 +45,38 @@
   <div class="welcome-div">
     <div class="main-cont-div">
       <h1>Welcome !!</h1>
-
       <h2>Onward with Your Professional </h2>
       <h3>Journey</h3>
     </div>
   </div>
   <div class="cont-div">
     <div class="form-cont">
+      <div class="mainlog">
+        <form *ngIf="activeForm === 'login'" [formGroup]="loginForm" (ngSubmit)="login()" class="testL">
+          <h4>Login to your Account</h4>
+          <div class="form-group">
+            <input type="email" formControlName="email" placeholder="Email" class="input-field" />
+          </div>
+          <div class="form-group">
+            <input type="password" formControlName="password" placeholder="Password" class="input-field" />
+          </div>
+          <button type="submit" class="Lbutton">Login</button>
+          <div class="remember">
+            <input type="checkbox" id="remember-me" name="remember-me" value="Remember">
+            <label for="remember-me" class="remember-me">Remember Me</label>
+            <a href="#" class="FP"> Forget Password?</a>
+          </div>
+          <br>
+          <p (click)="toggleForm('register')">Don't have an account?
+            <span class="highlighted">Register</span>
+        </form>
 
-      <!-- Login Form -->
-      <form *ngIf="activeForm === 'login'" [formGroup]="loginForm" (ngSubmit)="login()" class="setup-container">
-        <h2>Login</h2>
+
+        <!-- Login Form -->
+        <!-- <form *ngIf="activeForm === 'login'" [formGroup]="loginForm" (ngSubmit)="login()" class="setup-container">
+        <h2 class="Tlogin">Login</h2>
         <div class="form-group">
           <input type="email" formControlName="email" placeholder="Email" class="input-field" />
-          @if (loginForm.get('price')?. hasError('required') && loginForm.get ('price')?. touched) {
-           <div class="form-text text-danger fw-bold" > Price is required. </div>
-          }
         </div>
         <div class="form-group">
           <input type="password" formControlName="password" placeholder="Password" class="input-field" />
@@ -68,43 +84,53 @@
         <button type="submit" class="Lbutton">Login</button>
         <p (click)="toggleForm('register')">Don't have an account?
           <span class="highlighted">Register</span>
-      </form>
-
-      <!-- Register Form -->
-      <form *ngIf="activeForm === 'register'" [formGroup]="registerForm" (ngSubmit)="register()"
-        class="setup-container">
-        <h1 class="setup-title">Setup your Account</h1>
-        <div class="name-container">
-          <label for="firstName" class="visually-hidden">First Name</label>
-          <input type="text" formControlName="firstName" placeholder="First Name" class="input-field" />
+      </form> -->
 
 
-          <input type="text" formControlName="lastName" placeholder="Last Name" class="input-field" />
-        </div>
-        <div class="info-container">
-          <input type="date" formControlName="dob" placeholder="Date of Birth" class="input-field" />
 
-          <select formControlName="gender" class="input-field">
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div></div>
-        <input type="text" formControlName="address" placeholder="Address" class="input-field" />
-        <input type="email" formControlName="email" placeholder="Email" class="input-field">
-        <input type="tel" formControlName="mobile" placeholder="Mobile Number" class="input-field" />
-        <input type="text" formControlName="country" placeholder="Country" class="input-field" />
-        <input type="password" formControlName="password" placeholder="Password" class="input-field" />
-        <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" class="input-field" />
 
-        <button type="submit" class="reg-button">Register</button>
-        <p (click)="toggleForm('login')">Already have an account?
-          <span class="highlighted">Login</span>
-        </p>
 
-      </form>
+        <!-- Register Form -->
+        <form *ngIf="activeForm === 'register'" [formGroup]="registerForm" (ngSubmit)="register()"
+          class="setup-container">
+          <h1 class="setup-title">Setup your Account</h1>
+          <div class="name-container">
+            <label for="firstName" class="visually-hidden">First Name</label>
+            <input type="text" formControlName="firstName" placeholder="First Name" class="input-field" />
+
+
+            <input type="text" formControlName="lastName" placeholder="Last Name" class="input-field" />
+          </div>
+          <div class="info-container">
+            <input type="date" formControlName="dob" placeholder="Date of Birth" class="input-field" />
+
+            <select formControlName="gender" class="input-field">
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div></div>
+          <input type="text" formControlName="address" placeholder="Address" class="input-field" />
+          <input type="email" formControlName="email" placeholder="Email" class="input-field">
+          <input type="tel" formControlName="mobile" placeholder="Mobile Number" class="input-field" />
+          <input type="text" formControlName="country" placeholder="Country" class="input-field" />
+          <input type="password" formControlName="password" placeholder="Password" class="input-field" />
+          <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" class="input-field" />
+          <div class="regdiv">
+            <button type="submit" class="regbt">Register</button>
+          </div>
+          
+          
+          <p (click)="toggleForm('login')">Already have an account?
+            <span class="highlighted">Login</span>
+          </p>
+
+        </form>
+
+      </div>
+
     </div>
 
   </div>
