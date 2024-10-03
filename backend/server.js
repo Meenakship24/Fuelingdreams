@@ -7,7 +7,7 @@ app.use(cors());
 
 // Create a connection to the database
 const connection = mysql.createConnection({
-  host: '10.30.72.81',
+  host: 'Shravani',
   user: 'portal',
   password: 'Shra@123',
   database: 'portal'
@@ -25,7 +25,7 @@ connection.connect(err => {
 });
 
 // API endpoint to fetch profile data
-app.get('/api/profile/', (req, res) => {
+app.get('/api/profile', (req, res) => {
   //const userId = req.params.id;  // This is still being retrieved, but not used for the query
   const query = 'SELECT  f_name, l_name, email,  dob, gender, phone_no, country, address FROM user_regis WHERE id = 1';  // Hardcoded ID
 
