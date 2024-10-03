@@ -1,28 +1,36 @@
+require('dotenv').config(); // Load environment variables
 const express = require('express');
-const mysql = require('mysql2');
-const cors = require('cors');
+const bodyParser = require('body-parser');
+const mysql = require('mysql2/promise');
+const bcrypt = require('bcrypt');
+const cors = require('cors')
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT;  // Use port from .env
 
-// Create a connection to the database
-const connection = mysql.createConnection({
-  host: 'Addy',
-  user: 'portal',
-  password: 'adnan@123',
-  database: 'portal'
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
+
+// MySQL Connection Pool using .env variables
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
-
-
-// Connect to the database
-connection.connect(err => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err.stack);
-    return;
+// Check MySQL Connection
+(async () => {
+  try {
+      const connection = await pool.getConnection();
+      console.log('Connected to MySQL database.');
+      connection.release(); // Release the connection back to the pool
+  } catch (error) {
+      console.error('Database connection failed:', error);
   }
-  console.log('Connected to MySQL');
-});
+})();
 
 // API endpoint to fetch profile data
 app.get('/api/profile/', (req, res) => {
