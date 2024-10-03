@@ -12,6 +12,7 @@ body {
     overflow: hidden;
 }
 
+
 .profile-image {
     position: relative;
     background-color: rgb(180, 180, 218);
@@ -74,7 +75,7 @@ body {
 .info-container {
     gap: 20px;
     display: flex;
-    width: 92%;
+    width: 90%;
     
 
 }
@@ -110,6 +111,7 @@ body {
     background-color: rgba(190, 205, 214, 0.45);
     display: flex;
     margin-top: 13px;
+    
     height: 41px;
     border: none;
     padding: 0 10px;
@@ -122,14 +124,12 @@ body {
     color: rgba(0, 0, 0, 1);
     // align-self: start;
     font-weight: 600;
-    padding-top: 20px;
+    padding-top: 14px;
     font-size: 16px;
 }
 
 
-.address-label {
-    margin-top: 30px;
-}
+
 
 // .email-label {
 //     margin: 25px 0 0 12px;

@@ -12,6 +12,7 @@ const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT;  // Use port from .env
 
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -130,7 +131,8 @@ app.post('/register', async (req, res) => {
         console.error('Error getting database connection:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
-});
+=======
+
 
 // Login Route
 app.post('/login', async (req, res) => {
