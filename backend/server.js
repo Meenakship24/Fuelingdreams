@@ -153,10 +153,6 @@ app.post('/login', async (req, res) => {
       console.log(`Password mismatch for email: ${email}`);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    // if (password === user.pass) {
-    //   console.log(`Password mismatch for email: ${email}`);
-    //   return res.status(401).json({ error: 'Invalid credentials' });
-    // }
 
     if (user.status === 1) {
       const token = jwt.sign({ id: user.id }, secretKey, { expiresIn: '1h' });
@@ -240,6 +236,148 @@ app.get('/api/profile/', (req, res) => {
     }
   });
 });
+
+// Profile image upload route
+app.post('/api/upload-profile-image', verifyToken, upload.single('profileImage'), async (req, res) => {
+  if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  const imagePath = `/uploads/${req.file.filename}`;
+
+  try {
+      // Update user's profile in MySQL
+      await pool.query('UPDATE user_regis SET profile_image_path = ? WHERE id = ?', [imagePath, req.userId]);
+
+      // Get user email from MySQL
+      const [userResult] = await pool.query('SELECT email FROM user_regis WHERE id = ?', [req.userId]);
+      const userEmail = userResult[0]?.email;
+
+      // Update user's profile in MongoDB
+      await User.findOneAndUpdate({ email: userEmail }, { profileImagePath: imagePath }, { upsert: true });
+
+      res.json({
+          message: 'Profile image uploaded successfully',
+          imagePath: imagePath
+      });
+  } catch (error) {
+      console.error('Error updating profile image:', error);
+      res.status(500).json({ error: 'Failed to update profile image' });
+  }
+});
+
+// Get profile image route
+app.get('/api/profile-image', verifyToken, async (req, res) => {
+  try {
+      const [rows] = await pool.query('SELECT email, profile_image_path FROM user_regis WHERE id = ?', [req.userId]);
+      if (rows.length > 0) {
+          const user = rows[0];
+          if (user.profile_image_path) {
+              res.json({ imagePath: user.profile_image_path });
+          } else {
+              // If not in MySQL, check MongoDB
+              const mongoUser = await User.findOne({ email: user.email });
+              if (mongoUser && mongoUser.profileImagePath) {
+                  res.json({ imagePath: mongoUser.profileImagePath });
+              } else {
+                  res.json({ imagePath: null });
+              }
+          }
+      } else {
+          res.status(404).json({ error: 'User not found' });
+      }
+  } catch (error) {
+      console.error('Error fetching profile image:', error);
+      res.status(500).json({ error: 'Failed to fetch profile image' });
+  }
+});
+
+// Route to handle account deletion with password confirmation
+router.post('/delete-account', async (req, res) => {
+  const { email, password } = req.body;
+
+  // Validate input
+  if (!email || !password) {
+      return res.status(400).json({ status: 'error', message: 'Email and password are required' });
+  }
+
+  try {
+      // Retrieve the user's hashed password from the database
+      const [rows] = await pool.query('SELECT password FROM user_regis WHERE email = ?', [email]);
+
+      if (rows.length === 0) {
+          return res.status(404).json({ status: 'error', message: 'User not found' });
+      }
+
+      const hashedPassword = rows[0].password;
+
+      // Compare the entered password with the stored hashed password
+      const isMatch = await bcrypt.compare(password, hashedPassword);
+
+      if (!isMatch) {
+          return res.status(400).json({ status: 'error', message: 'Incorrect password' });
+      }
+
+      // Mark account for deletion if the password is correct
+      await pool.query('UPDATE user_regis SET status = -1 WHERE email = ?', [email]);
+
+      res.status(200).json({ status: 'success', message: 'Account marked for deletion' });
+  } catch (error) {
+      console.error('Error verifying password or deleting account:', error);
+      res.status(500).json({ status: 'error', message: 'Error processing account deletion' });
+  }
+});
+
+// // Route to send verification code for account deletion
+// router.post('/delete-account', async (req, res) => {
+//   const { email } = req.body;
+  
+//   // Validate input
+//   if (!email) {
+//       return res.status(400).json({ status: 'error', message: 'Email is required' });
+//   }
+  
+//   // Generate a verification code
+//   const verificationCode = crypto.randomBytes(4).toString('hex');
+//   resetCodes[email] = verificationCode;
+  
+//   // Send verification code via email
+//   const mailOptions = {
+//       from: emailConfig.user,  // Use emailConfig here
+//       to: email,
+//       subject: 'Account Deletion Verification Code',
+//       text: `Your account deletion verification code is: ${verificationCode}`,
+//   };
+  
+//   try {
+//       const info = await transporter.sendMail(mailOptions);
+//       console.log('Email sent: ' + info.response);
+//       res.status(200).json({ status: 'success', message: 'Verification code sent to email' });
+//   } catch (error) {
+//       console.error('Error sending email:', error);
+//       res.status(500).json({ status: 'error', message: 'Error sending verification email' });
+//   }
+// });
+
+// // Route to verify deletion code
+// router.post('/verify-delete-code', async (req, res) => {
+//   const { email, code } = req.body;
+  
+//   if (resetCodes[email] === code) {
+//       try {
+//           // Update status to -1 (account marked for deletion)
+//           await pool.query('UPDATE user_regis SET status = -1 WHERE email = ?', [email]);
+//           // Remove code after successful verification
+//           delete resetCodes[email];
+//           res.status(200).json({ status: 'success', message: 'Account marked for deletion' });
+//       } catch (error) {
+//           console.error('Error updating user status:', error);
+//           res.status(500).json({ status: 'error', message: 'Error updating user status' });
+//       }
+//   } else {
+//       res.status(400).json({ status: 'error', message: 'Invalid or expired verification code' });
+//   }
+// });
 
 // Start the server
 app.listen(port, () => {
